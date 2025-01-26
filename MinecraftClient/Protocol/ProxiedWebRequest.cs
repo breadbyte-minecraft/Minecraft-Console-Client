@@ -163,7 +163,9 @@ namespace MinecraftClient.Protocol
             if (IsSecure)
             {
                 stream = new SslStream(client.GetStream());
-                ((SslStream)stream).AuthenticateAsClient(Host, null, SslProtocols.Tls12, true); // Enable TLS 1.2. Hotfix for #1774
+                
+                // Todo: Add switch for revocation mode
+                ((SslStream)stream).AuthenticateAsClient(Host, null, SslProtocols.Tls12, false); // Enable TLS 1.2. Hotfix for #1774
             }
             else
             {
