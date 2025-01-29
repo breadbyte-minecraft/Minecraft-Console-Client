@@ -76,6 +76,12 @@ namespace MinecraftClient
                 
                 AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
                 {
+                    if (eventArgs.IsTerminating) {
+                        Console.WriteLine("!! An unhandled exception occurred: " + eventArgs.ExceptionObject.ToString());
+                        Console.WriteLine("Send the following Trace ID to the developers:");
+                        Console.WriteLine(SentrySdk.GetTraceHeader()?.TraceId.ToString());
+                    }
+
                     SentrySdk.CaptureException((Exception)eventArgs.ExceptionObject);
                 };
             }
