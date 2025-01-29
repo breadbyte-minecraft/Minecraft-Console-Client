@@ -185,6 +185,9 @@ namespace MinecraftClient.Protocol.Handlers.packet.s2c
 
         private static void CollectSignArguments(int NodeIdx, string command, List<Tuple<string, string>> arguments)
         {
+            if (Nodes.Length == 0)
+                return;
+            
             CommandNode node = Nodes[NodeIdx];
             string last_arg = command;
             switch (node.Flags & 0x03)
