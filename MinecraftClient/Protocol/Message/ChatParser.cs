@@ -75,7 +75,6 @@ namespace MinecraftClient.Protocol.Message
                 }
             }
             
-            var chatTypeDictionary = ChatId2Type ?? new Dictionary<int, MessageType>();
             var chatTypeListNbt =
                 (object[])(((Dictionary<string, object>)registryCodec["minecraft:chat_type"])["value"]);
           
