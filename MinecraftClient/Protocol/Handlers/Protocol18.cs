@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -2315,7 +2315,6 @@ namespace MinecraftClient.Protocol.Handlers
                         {
                             if (entity.Type == EntityType.Player)
                                 handler.OnSpawnPlayer(entity.ID, entity.UUID, entity.Location, (byte)entity.Yaw, (byte)entity.Pitch);
-                            
                             break;
                         }
                         
