@@ -20,7 +20,7 @@ namespace MinecraftClient.Mapping
         /// <summary>
         /// The dimension info of the world
         /// </summary>
-        private static Dimension curDimension = new();
+        private static Dimension curDimension= new();
 
         private static readonly Dictionary<string, Dimension> dimensionList = new();
 
