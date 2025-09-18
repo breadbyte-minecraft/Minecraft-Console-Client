@@ -31,6 +31,29 @@ namespace MinecraftClient.Protocol.Message
 
         public static Dictionary<int, MessageType>? ChatId2Type;
 
+        // Used to store Chat Types in 1.20.6+
+        public static void ReadChatType(Dictionary<int, string> data)
+        {
+            var chatTypeDictionary = ChatId2Type ?? new Dictionary<int, MessageType>();
+
+            foreach (var (chatId, chatName) in data)
+            {
+                chatTypeDictionary[chatId] = chatName switch
+                {
+                    "minecraft:chat" => MessageType.CHAT,
+                    "minecraft:emote_command" => MessageType.EMOTE_COMMAND,
+                    "minecraft:msg_command_incoming" => MessageType.MSG_COMMAND_INCOMING,
+                    "minecraft:msg_command_outgoing" => MessageType.MSG_COMMAND_OUTGOING,
+                    "minecraft:say_command" => MessageType.SAY_COMMAND,
+                    "minecraft:team_msg_command_incoming" => MessageType.TEAM_MSG_COMMAND_INCOMING,
+                    "minecraft:team_msg_command_outgoing" => MessageType.TEAM_MSG_COMMAND_OUTGOING,
+                    _ => MessageType.CHAT,
+                };
+            }
+
+            ChatId2Type = chatTypeDictionary;
+        }
+
         public static void ReadChatType(Dictionary<string, object> registryCodec)
         {
             Dictionary<int, MessageType> chatTypeDictionary = ChatId2Type ?? new();
